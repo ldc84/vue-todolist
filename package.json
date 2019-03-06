@@ -31,5 +31,7 @@
     "> 1%",
     "last 2 versions",
     "not ie <= 8"
-  ]
+  ],
+  "wst": "/dist/",
+  "homepage": "https://github.com/ldc84/vue-todolist"
 }
