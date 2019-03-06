@@ -1,5 +1,6 @@
 <template>
   <div class="home">
+    <mdc-display>Todos</mdc-display>
     <img alt="Vue logo" src="../assets/logo.png">
     <HelloWorld msg="Welcome to Your Vue.js App"/>
 
@@ -11,6 +12,10 @@
       <mdc-tab>item two</mdc-tab>
       <mdc-tab>item three</mdc-tab>
     </mdc-tab-bar>
+
+    <ul class="list">
+      <li>gaga</li>
+    </ul>
     
   </div>
 </template>
@@ -31,8 +36,8 @@ export default {
   },
   methods: {
     showSnackbar() {
-      this.$refs.snackbar.show({ 
-        message: 'Message' 
+      this.$refs.snackbar.show({
+        message: 'Message'
       })
     },
   }
@@ -40,7 +45,9 @@ export default {
 </script>
 
 
-<style lang="scss">
+<style lang="scss" scoped>
 /* theme.scss */
-
+.list {
+  background:blue;
+}
 </style>
