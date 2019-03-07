@@ -16,12 +16,12 @@ export default new Vuex.Store({
     setListUpdate(context, item){
       context.commit('M_LIST', item);
     },
+    setListDetete(context, item){
+      context.commit('M_DELETE', item);
+    },
     setListModify(context, item){
       context.commit('M_MODIFY', item);
     },
-    setListDetete(context, item){
-      context.commit('M_DELETE', item);
-    }
   },
   mutations: {
     M_LIST(state, item) {
@@ -31,11 +31,11 @@ export default new Vuex.Store({
         checked: false
       });
     },
-    M_MODIFY(state, item) {
-      console.log(item.value);
-    },
     M_DELETE(state, item) {
       state.list.splice(item, 1);
-    }
+    },
+    M_MODIFY(state, item) {
+      console.log(item);
+    },
   }
 })
