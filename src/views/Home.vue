@@ -1,28 +1,17 @@
 <template>
   <div class="home">
-    <mdc-display>Todos</mdc-display>
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
 
-    <mdc-button raised @click="showSnackbar">Show Snackbar</mdc-button>
-    <mdc-snackbar ref="snackbar"/>
+    <mdc-display><img src="../assets/logo.png" alt="Vue logo"> Todos</mdc-display>
 
-    <mdc-tab-bar>
-      <mdc-tab>item one</mdc-tab>
-      <mdc-tab>item two</mdc-tab>
-      <mdc-tab>item three</mdc-tab>
-    </mdc-tab-bar>
-
-    <ul class="list">
-      <li>gaga</li>
-    </ul>
+    <Header />
+    <List />
     
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+import Header from '~@/TodoHeader.vue'
+import List from '~@/TodoList.vue'
 
 export default {
   name: 'home',
@@ -32,22 +21,21 @@ export default {
     }
   },
   components: {
-    HelloWorld
+    Header,
+    List
   },
-  methods: {
-    showSnackbar() {
-      this.$refs.snackbar.show({
-        message: 'Message'
-      })
-    },
-  }
 }
 </script>
 
 
 <style lang="scss" scoped>
 /* theme.scss */
-.list {
-  background:blue;
+.home {
+  padding:20px 10px;
+  img {
+    width:14%;
+    margin-top:-6px;
+    vertical-align: middle;
+  }
 }
 </style>
