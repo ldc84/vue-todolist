@@ -33,14 +33,18 @@ export default new Vuex.Store({
         checked: false
       }
       state.list.push(list);
-      localStorage.setItem('todoList', JSON.stringify(state.list));
+      this.commit('M_SET_LOCALSTORAGE');
     },
     M_DELETE(state, payload) {
       state.list.splice(payload.todo, 1);
-      localStorage.setItem('todoList', JSON.stringify(state.list));
+      this.commit('M_SET_LOCALSTORAGE');
     },
     M_MODIFY(state, payload) {
-      console.log(payload);
+      state.list[payload].checked = !state.list[payload].checked;
+      this.commit('M_SET_LOCALSTORAGE');
+    },
+    M_SET_LOCALSTORAGE(state) {
+      localStorage.setItem('todoList', JSON.stringify(state.list));
     },
     M_SHOW_LIST(state, payload) {
       const localList = localStorage.hasOwnProperty('todoList') ? JSON.parse(localStorage.todoList) : localStorage.setItem('todoList', JSON.stringify([]));

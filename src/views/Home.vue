@@ -1,10 +1,24 @@
 <template>
   <div class="home">
 
-    <mdc-display><img src="../assets/logo.png" alt="Vue logo"> Todos</mdc-display>
+    <mdc-layout-app>
+  
+      <mdc-toolbar slot="toolbar">
+        <mdc-display>TO-DO LIST</mdc-display>
+      </mdc-toolbar>
+      
+      <mdc-drawer slot="drawer">
+        <!--  drawer markup here -->      
+      </mdc-drawer>
+      
+      <main>
 
-    <Header />
-    <List />
+        <Header />
+        <List />
+      </main>
+      
+    </mdc-layout-app>
+
     
   </div>
 </template>
@@ -31,11 +45,15 @@ export default {
 <style lang="scss" scoped>
 /* theme.scss */
 .home {
-  padding:20px 10px;
-  img {
-    width:14%;
-    margin-top:-6px;
-    vertical-align: middle;
+  h1 {
+    height:80px;
+    line-height:80px;
+    font-size:50px;
+    background:url("../assets/logo.png") no-repeat -30px center;
+    background-size:auto 60px;
+  }
+  main {
+    padding:20px;
   }
 }
 </style>

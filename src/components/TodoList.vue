@@ -2,11 +2,7 @@
   <div class="todo-list">
     <ul class="list">
       <li v-for="(item, index) in todoList" :key="index">
-        <!-- <mdc-checkbox v-model="item.checked" /> -->
-        <p v-if="!item.modify" @dblclick="item.modify = !item.modify">{{ item.title }}</p>
-        <p v-if="item.modify">
-          <input type="text" v-model="item.title" @keydown.enter="listModify(index)">
-        </p>
+        <p :class="{'active' : item.checked}" @click="listModify(index)">{{ item.title }}</p>
         <span class="del" @click="listDelete(index)">
           <mdc-icon icon="cancel"></mdc-icon>
         </span>
@@ -35,9 +31,8 @@ export default {
     listDelete(todo){
       this.setListDetete(todo);
     },
-    listModify(idx){
-      console.log(idx);
-      // this.setListModify(val);
+    listModify(chx){
+      this.setListModify(chx);
     },
     ...mapActions(['setListDetete', 'setListModify', 'getListShow'])
   }
@@ -56,15 +51,16 @@ export default {
     li {
       position:relative;
       border-bottom:1px solid #f0f0f0;
-      /* .mdc-checkbox-wrapper {
-        position:absolute;
-        top:0;
-        left:0;
-        display:inline-block;
-      } */
+      overflow:hidden;
       p {
         padding:10px 30px 10px 10px;
         font-size:14px;
+        transition:all .3s ease-in-out;
+        &.active {
+          padding-left:15px;
+          text-decoration: line-through;
+          opacity:0.5;
+        }
       }
       input[type=text] {
         border:1px solid #999;
@@ -72,10 +68,20 @@ export default {
       .del {
         position:absolute;
         top:50%;
-        right:10px;
+        right:-40px;
         transform:translateY(-50%);
-        font-size:16px;
         cursor:pointer;
+        opacity:0;
+        transition:all .2s ease-in-out;
+        .mdc-icon.mdc-icon--material {
+          font-size:18px;
+        }
+      }
+      &:hover {
+        .del {
+          right:10px;
+          opacity:1;
+        }
       }
     }
   }
