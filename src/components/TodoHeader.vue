@@ -1,6 +1,6 @@
 <template>
   <header class="todo-header">
-    <mdc-textfield v-model="text" label="항목을 입력하세요" @keypress.enter="listUpdate(text)" />
+    <mdc-textfield v-model="text" label="항목을 입력하세요" @keypress.enter="listUpdate" />
   </header>  
 </template>
 
@@ -15,7 +15,7 @@ export default {
   methods: {
     listUpdate(item){
       if(this.text == '') return;
-      this.setListUpdate(item);
+      this.setListUpdate(this.text);
       this.text = '';
     },
     ...mapActions(['setListUpdate'])

@@ -1,7 +1,7 @@
 <template>
   <div class="todo-list">
     <ul class="list">
-      <li v-for="(item, index) in $store.getters.list" :key="index">
+      <li v-for="(item, index) in todoList" :key="index">
         <!-- <mdc-checkbox v-model="item.checked" /> -->
         <p v-if="!item.modify" @dblclick="item.modify = !item.modify">{{ item.title }}</p>
         <p v-if="item.modify">
@@ -23,15 +23,23 @@ export default {
       
     }
   },
+  created() {
+    this.getListShow();
+  },
+  computed: {
+    todoList(){
+      return this.$store.state.list;
+    }
+  },
   methods: {
-    listDelete(idx){
-      this.setListDetete(idx);
+    listDelete(todo){
+      this.setListDetete(todo);
     },
     listModify(idx){
       console.log(idx);
       // this.setListModify(val);
     },
-    ...mapActions(['setListDetete', 'setListModify'])
+    ...mapActions(['setListDetete', 'setListModify', 'getListShow'])
   }
 }
 </script>
