@@ -2,8 +2,8 @@
   <div class="todo-list">
     <ul class="list">
       <li v-for="(item, index) in todoList" :key="index">
-        <p :class="{'active' : item.checked}" @click="listModify(index)">{{ item.title }}</p>
-        <span class="del" @click="listDelete(index)">
+        <p :class="{'active' : item.checked}" @click="setListChecked(index)" @dblclick="modify">{{ item.title }}</p>
+        <span class="del" @click="setListDetete(index)">
           <mdc-icon icon="cancel"></mdc-icon>
         </span>
       </li>
@@ -28,13 +28,10 @@ export default {
     }
   },
   methods: {
-    listDelete(todo){
-      this.setListDetete(todo);
+    modify(){
+      console.log(1);
     },
-    listModify(chx){
-      this.setListModify(chx);
-    },
-    ...mapActions(['setListDetete', 'setListModify', 'getListShow'])
+    ...mapActions(['setListDetete', 'setListChecked', 'getListShow'])
   }
 }
 </script>
@@ -59,7 +56,7 @@ export default {
         &.active {
           padding-left:15px;
           text-decoration: line-through;
-          opacity:0.5;
+          opacity:0.3;
         }
       }
       input[type=text] {

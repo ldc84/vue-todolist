@@ -4,17 +4,28 @@
     <mdc-layout-app>
   
       <mdc-toolbar slot="toolbar">
-        <mdc-display>TO-DO LIST</mdc-display>
+        <mdc-toolbar-row>
+          <mdc-toolbar-section align-start >
+            <mdc-toolbar-menu-icon event="toggle-drawer"></mdc-toolbar-menu-icon>
+            <mdc-toolbar-title>TO-DO LIST</mdc-toolbar-title>
+          </mdc-toolbar-section>
+        </mdc-toolbar-row>
+        <!-- <mdc-display>TO-DO LIST</mdc-display> -->
       </mdc-toolbar>
       
-      <mdc-drawer slot="drawer">
-        <!--  drawer markup here -->      
+      <mdc-drawer slot="drawer" toggle-on="toggle-drawer">
+        <mdc-drawer-list>
+            <mdc-drawer-item start-icon="inbox">Inbox</mdc-drawer-item>
+            <mdc-drawer-item start-icon="send">Sent Mail</mdc-drawer-item>
+            <mdc-drawer-item start-icon="drafts">Drafts</mdc-drawer-item>
+        </mdc-drawer-list>
       </mdc-drawer>
       
       <main>
 
         <Header />
         <List />
+        <Footer />
       </main>
       
     </mdc-layout-app>
@@ -26,6 +37,7 @@
 <script>
 import Header from '~@/TodoHeader.vue'
 import List from '~@/TodoList.vue'
+import Footer from '~@/TodoFooter.vue'
 
 export default {
   name: 'home',
@@ -36,7 +48,8 @@ export default {
   },
   components: {
     Header,
-    List
+    List,
+    Footer
   },
 }
 </script>

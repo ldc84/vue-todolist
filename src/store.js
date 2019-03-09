@@ -19,8 +19,11 @@ export default new Vuex.Store({
     setListDetete(context, item){
       context.commit('M_DELETE', { todo: item });
     },
-    setListModify(context, item){
-      context.commit('M_MODIFY', item);
+    setListChecked(context, item){
+      context.commit('M_CHECKED', item);
+    },
+    setListClear(context, list){
+      context.commit('M_CLEAR', list);
     },
     getListShow(context, list){
       context.commit('M_SHOW_LIST', list);
@@ -39,12 +42,16 @@ export default new Vuex.Store({
       state.list.splice(payload.todo, 1);
       this.commit('M_SET_LOCALSTORAGE');
     },
-    M_MODIFY(state, payload) {
+    M_CHECKED(state, payload) {
       state.list[payload].checked = !state.list[payload].checked;
       this.commit('M_SET_LOCALSTORAGE');
     },
     M_SET_LOCALSTORAGE(state) {
       localStorage.setItem('todoList', JSON.stringify(state.list));
+    },
+    M_CLEAR(state) {
+      state.list = [];
+      localStorage.setItem('todoList', JSON.stringify([]))
     },
     M_SHOW_LIST(state, payload) {
       const localList = localStorage.hasOwnProperty('todoList') ? JSON.parse(localStorage.todoList) : localStorage.setItem('todoList', JSON.stringify([]));
