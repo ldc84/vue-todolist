@@ -25,15 +25,16 @@ export default new Vuex.Store({
     setListClear(context, list){
       context.commit('M_CLEAR', list);
     },
-    getListShow(context, list){
-      context.commit('M_SHOW_LIST', list);
+    getListShow(context){
+      context.commit('M_SHOW_LIST');
     }
   },
   mutations: {
     M_LIST(state, payload) {
       const list = {
         title: payload.todo,
-        checked: false
+        checked: false,
+        modify: false
       }
       state.list.push(list);
       this.commit('M_SET_LOCALSTORAGE');
@@ -55,6 +56,9 @@ export default new Vuex.Store({
     },
     M_SHOW_LIST(state, payload) {
       const localList = localStorage.hasOwnProperty('todoList') ? JSON.parse(localStorage.todoList) : localStorage.setItem('todoList', JSON.stringify([]));
+      localList.map(item => {
+        item.modify = false;
+      });
       state.list = localList;
     }
   }
