@@ -10,7 +10,7 @@
         </transition>
         <transition name="fade" appear>
           <div v-if="!this.$store.state.list.length">
-            완료된 항목이 없습니다.
+            항목이 없습니다.
           </div>
         </transition>
       </div>
