@@ -2,12 +2,15 @@
   <div class="todo-list">
     <ul class="list">
       <li v-for="(item, index) in todoList" :key="index">
-        <transition name="flip" mode="out-in" appear>
-          <p :class="{'active' : item.checked}" @click="setListChecked(index)" @dblclick="modify(index)">{{ item.title }}</p>
-          <!-- <p v-if="!item.modify" :class="{'active' : item.checked}" @click="setListChecked(index)" @dblclick="modify(index)">{{ item.title }}</p>
-          <p v-else class="input-area">
-            <mdc-textfield v-model="item.title" @keypress.enter="modifySuccess(item.title, index)" />
-          </p> -->
+        <transition name="flip" mode="out-in" tag="div" appear>
+          <div>
+            <!-- <p :class="{'active' : item.checked}" @click="setListChecked(index)" @dblclick="modify(index)">{{ item.title }}</p> -->
+            <p class="ico" v-if="!item.modify" :class="{'active' : item.checked}" @click="setListChecked(index)"></p>
+            <p v-if="!item.modify" class="text" :class="{'active' : item.checked}" @click="setListChecked(index)" @dblclick="modify(index)">{{ item.title }}</p>
+            <p v-else class="input-area">
+              <mdc-textfield v-model="item.title" @keypress.enter="modifySuccess(item.title, index)" />
+            </p>
+          </div>
         </transition>
         <span class="del" @click="setListDetete(index)">
           <mdc-icon icon="cancel"></mdc-icon>
@@ -35,6 +38,7 @@ export default {
   },
   methods: {
     modify(payload){
+      console.log(payload);
       this.$store.state.list.map( (item, index)=> {
         item.modify = false ;
       })
@@ -61,28 +65,48 @@ export default {
     text-align:left;
     li {
       position:relative;
+      height:50px;
+      padding-left:40px;
       border-bottom:1px solid #f0f0f0;
       overflow:hidden;
-      p {
+      .ico {
+        position:absolute;
+        top:30%;
+        left:5px;
+        &:after {
+          content:'';
+          display:block;
+          width:16px;
+          height:16px;
+          border:2px solid #222;
+          background-color:#fff;
+        }
+        &.active {
+          &:after {
+            background-color:#018786;
+          }
+        }
+      }
+      .text {
         position:relative;
         height:50px;
         line-height:50px;
         font-size:14px;
         transition:all .3s ease-in-out;
         &.active {
-          padding-left:15px;
+          padding-left:14px;
           text-decoration: line-through;
           opacity:0.3;
         }
-        &.input-area {
-          padding:0;
-          .mdc-textfield-wrapper {
-            position:absolute;
-            bottom:0;
-            left:0;
-            width:100%;
-            margin:0;
-          }
+      }
+      .input-area {
+        padding:0;
+        .mdc-textfield-wrapper {
+          position:absolute;
+          bottom:0;
+          left:0;
+          width:100%;
+          margin:0;
         }
       }
       input[type=text] {
@@ -118,7 +142,6 @@ export default {
   }
 
   .flip-enter, .flip-leave-to {
-    transform: scaleY(0) translateZ(0);
     opacity: 0;
   }
 </style>
